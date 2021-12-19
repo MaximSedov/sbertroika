@@ -1,4 +1,9 @@
-# map
+# sbertroika
+
+## Server connection
+```
+change to the address of your server - const host = '62.113.98.138:5000'
+```
 
 ## Project setup
 ```
