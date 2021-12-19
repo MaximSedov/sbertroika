@@ -7,7 +7,6 @@
 
       <!-- Маркеры -->
       <l-marker v-for="(marker, idx) in markers" :key="marker[idx]" :lat-lng="marker" :icon="icon" />
-
       <!-- Маршрут  -->
       <div v-for="(line, idx) in polyline" :key="line[idx]" class>
         <!-- Скрыть маршруты по клику -->
@@ -17,6 +16,8 @@
             <!-- <l-marker :lat-lng="point"  icon-url="bike.svg"></l-marker> -->
             <l-marker :lat-lng="point">
               <l-icon :icon-size="[40, 40]" :icon-url="require('../../public/' + point.type + '.svg')"></l-icon>
+              <l-tooltip v-if="point.type == 'pier'">Приблизительное время <br> ожидания 15-20 минут</l-tooltip>
+              <l-tooltip v-if="point.type == 'bike'">Есть свободные <br> велосипеды для аренды</l-tooltip>
             </l-marker>
           </div>
           <l-polyline v-for="(waypoints, idx) in line.waypoints" :key="waypoints[idx]" :lat-lngs="waypoints.waypoint" :color="waypoints.color" :weight="6"></l-polyline>
@@ -456,7 +457,9 @@ export default {
     margin-bottom: 0;
   }
 }
-
+.leaflet-tooltip{
+  color:$blue !important;
+}
 @media (max-width: 767px) {
   .p-dialog {
     margin-top: 0 !important;
